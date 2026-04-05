@@ -2,6 +2,19 @@
 
 Todas las actualizaciones notables, decisiones arquitectónicas y mejoras en las métricas de este proyecto se documentarán en este archivo.
 
+## [V6.0] - 2026-04-05 (Optimización de Precisión)
+### Añadido
+- **Agente de Query Rewriting (Pre-Retrieval):** Implementación de una etapa de pre-procesamiento mediante un LLM especializado que purifica, corrige y normaliza el input del usuario (OCR/Texto crudo) antes de la búsqueda.
+- **Patrón de Doble Inferencia:** Reestructuración del pipeline para separar la normalización de la consulta de la extracción final de entidades.
+
+### Cambiado
+- **Arquitectura del Pipeline de Inferencia:** El flujo ahora sigue la secuencia: *Input Crudo -> Query Rewriter -> Motor Híbrido -> Extractor Final*.
+
+### Resultados
+- **Ruptura de Umbral de Desempeño:** Superación del estancamiento del 80% en el F1-Score, mitigando el ruido léxico y los errores de transcripción del OCR.
+- **Optimización de Recall:** Incremento significativo en la recuperación de documentos relevantes a cambio de un aumento marginal en la latencia.
+
+
 ## [V5.0] - 2026-04-05 (Producción PoC)
 ### Añadido
 - **BuscadorHibridoPersonalizado:** Clase nativa que desacopla la orquestación de FAISS y BM25 (50/50), eliminando la dependencia de `langchain.retrievers` y optimizando la unificación de resultados sin duplicados.
