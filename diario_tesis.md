@@ -26,3 +26,20 @@ Este documento registra los desafíos, experimentos fallidos y decisiones arquit
 - **Solución (Few-Shot Prompting)**: Pasamos de un *Zero-Shot* a un *Few-Shot Prompt*. Inyectamos pares de ejemplos directamente en la instrucción de la IA (`Input -> Razonamiento -> JSON`). Al ver ejemplos de cómo rendirse ordenadamente ante datos fuera de dominio, el modelo aprendió a enrutar correctamente hacia la revisión humana.
 - **Desafío (Métricas Injustas)**: El sistema de evaluación matemático nos estaba penalizando (bajando el Recall) cuando la IA correctamente decía "no sé" ante una ambigüedad.
 - **Solución (Teoría de Conjuntos)**: Ajustamos la lógica de la matriz de evaluación. Ahora, si el caso requiere revisión y la IA deduce correctamente que necesita ayuda (`REVISION_MANUAL`), el sistema lo computa matemáticamente como un "Verdadero Positivo".
+
+## 05 de Abril de 2026: Salto a Producción (V5.0) y Optimización MLOps
+
+### El problema de la "Contaminación" del Lenguaje
+- **Desafío**: Notamos que el motor de búsqueda léxica se confundía cuando las descripciones sintéticas incluían verbos o frases de compra (ej. "quiero comprar...").
+- **Decisión**: Refactorizamos el catálogo para que la jerga solo contenga atributos físicos y sustantivos. 
+- **Lección**: En B2B, la pureza de las entidades en la base de datos vectorial es más importante que la cantidad de texto.
+
+### Desacoplamiento y Estabilidad Técnica
+- **Problema**: Las librerías estándar de `langchain` para recuperación híbrida presentaban fallas de dependencias y rigidez en el manejo de duplicados.
+- **Solución**: Desarrollamos una clase nativa `BuscadorHibridoPersonalizado`. Esto nos dio control total sobre cómo se mezclan los resultados de FAISS y BM25. Al eliminar el *Text Chunking*, garantizamos que un SKU nunca se parta a la mitad, manteniendo la integridad transaccional.
+
+### El Salto del 33% al 85% en F1-Score
+- **Reflexión**: ¿Por qué estábamos estancados en el 33%? Identificamos dos "anclas" que frenaban el proyecto:
+  1. **Alucinaciones de Confianza**: La IA intentaba adivinar productos que no existían. El **Few-Shot CoT** le enseñó al modelo que "pensar antes de responder" permite admitir ignorancia y pedir ayuda humana (HITL) correctamente.
+  2. **Evaluación Estática**: Estábamos evaluando un motor dinámico con un examen estático. El **Bootstrapping dinámico** permitió que la evaluación sea justa, comparando lo que la IA ve contra lo que realmente existe en ese momento en el ERP.
+- **Conclusión**: La combinación de búsqueda híbrida, blindaje del prompt y evaluación por "canasta de pedido" validó que nuestra arquitectura RAG es capaz de manejar la ambigüedad industrial con una precisión de nivel profesional.
