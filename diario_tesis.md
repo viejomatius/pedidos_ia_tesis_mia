@@ -43,3 +43,15 @@ Este documento registra los desafíos, experimentos fallidos y decisiones arquit
   1. **Alucinaciones de Confianza**: La IA intentaba adivinar productos que no existían. El **Few-Shot CoT** le enseñó al modelo que "pensar antes de responder" permite admitir ignorancia y pedir ayuda humana (HITL) correctamente.
   2. **Evaluación Estática**: Estábamos evaluando un motor dinámico con un examen estático. El **Bootstrapping dinámico** permitió que la evaluación sea justa, comparando lo que la IA ve contra lo que realmente existe en ese momento en el ERP.
 - **Conclusión**: La combinación de búsqueda híbrida, blindaje del prompt y evaluación por "canasta de pedido" validó que nuestra arquitectura RAG es capaz de manejar la ambigüedad industrial con una precisión de nivel profesional.
+
+## 05 de Abril de 2026: Superando el techo del 80% (Query Rewriting)
+
+### El "Techo de Cristal" de la Precisión
+- **Desafío**: Las métricas se estancaron en el 80%. Por más que ajustábamos los hiperparámetros del motor híbrido, el sistema seguía fallando en ciertos casos.
+- **Análisis de Errores**: Descubrimos que el culpable no era el buscador, sino el "ruido" del usuario. Errores ortográficos, sintaxis rota y la mala calidad del OCR ensuciaban la consulta, haciendo que FAISS y BM25 buscaran basura.
+- **Decisión Arquitectónica**: Implementamos **Query Rewriting**. En lugar de buscar directamente con el texto sucio del cliente, pusimos a un LLM pequeño y rápido a "traducir" el pedido a términos técnicos del catálogo antes de ir a la base de datos.
+- **Reflexión Técnica**: Este patrón de **Doble Inferencia** resolvió el problema de "Lost in the Middle". Al limpiar la consulta primero, el motor híbrido recibe "oro puro", lo que disparó el Recall global.
+- **Lección Aprendida**: Un Arquitecto de IA no solo busca modelos más grandes; busca estrategias para que la información fluya sin ruido a través de los componentes. El costo extra en latencia es un "trade-off" aceptable frente a la fiabilidad que ganamos.
+
+### Visión a Futuro: El Siguiente Nivel (Re-Ranking)
+- **Nota para la defensa**: Si bien el Query Rewriting nos llevó al éxito actual, la investigación sugiere que para alcanzar el 99% de precisión deberíamos implementar un **Re-Ranker con Cross-Encoders**. Esto actuaría como un "juez" de Deep Learning para calificar la relevancia de los resultados recuperados antes de la generación final. Queda planteado como trabajo futuro.
