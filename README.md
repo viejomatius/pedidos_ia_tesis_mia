@@ -12,6 +12,8 @@ El sistema aborda la "brecha semántica" entre la jerga del cliente y el catálo
 2. **Retrieval-Augmented Generation (RAG) Híbrido:** Combinación de BM25 (búsqueda léxica/Sparse) y FAISS (búsqueda semántica/Dense) para recuperar el contexto exacto del catálogo.
 3. **Generación Estructurada (LLMs):** Uso de GPT-4o-mini con técnicas de *Few-Shot* y *Chain-of-Thought prompting* para extraer entidades en un payload JSON estricto.
 4. **Lógica Transaccional y HITL:** Validación determinista de inventario (quiebres de stock) y enrutamiento automatizado hacia validadores humanos (*Human-in-the-Loop*) en escenarios de ambigüedad.
+5. **Data Flywheel & Aprendizaje Dinámico:** El sistema captura el *feedback* humano en un formato estructurado (JSONL). Para esta PoC, se utiliza la **Estrategia 1 (In-Context Learning)**, donde una base de datos vectorial secundaria inyecta correcciones históricas en el prompt para evitar que la IA cometa el mismo error dos veces. 
+   > ⚠️ **Roadmap a futuro:** A largo plazo y como evolución natural de este proyecto, se implementará la **Estrategia 2 (Fine-Tuning)**, utilizando este repositorio JSONL para realizar un ajuste fino de pesos neuronales sobre modelos fundacionales eficientes (Ej. Llama 3).
 
 ## ⚙️ Estructura del Pipeline
 El flujo de trabajo se divide en los siguientes módulos dentro del notebook principal (`procesamiento_pedidos_core.ipynb`):
