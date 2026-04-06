@@ -16,12 +16,14 @@ El sistema aborda la "brecha semántica" entre la jerga del cliente y el catálo
    > ⚠️ **Roadmap a futuro:** A largo plazo y como evolución natural de este proyecto, se implementará la **Estrategia 2 (Fine-Tuning)**, utilizando este repositorio JSONL para realizar un ajuste fino de pesos neuronales sobre modelos fundacionales eficientes (Ej. Llama 3).
 
 ## ⚙️ Estructura del Pipeline
-El flujo de trabajo se divide en los siguientes módulos dentro del notebook principal (`procesamiento_pedidos_core.ipynb`):
-* **Módulo 1:** Configuración, observabilidad (Logs) y gestión de secretos.
+El flujo de trabajo se divide en los siguientes módulos dentro del notebook principal, protegidos por un orquestador de estado estricto (DAG):
+* **Módulo 1:** Configuración, observabilidad (Logs), gestión de secretos y Orquestador de Dependencias.
 * **Módulo 2:** Ingesta del ERP simulado y construcción del Espacio Latente Híbrido.
-* **Módulo 3:** Motor de Inferencia Core y reglas de negocio.
-* **Módulo 4:** Bootstrapping dinámico y Evaluación Multi-Etiqueta (Precision, Recall, F1-Score).
-* **Módulos 5-7:** Visión Artificial, Data Flywheel (JSONL) y Frontend interactivo desplegado con Gradio.
+* **Módulo 3:** Motor de Inferencia Core (Query Rewriting + Few-Shot Extractor).
+* **Módulo 4:** Bootstrapping dinámico y Evaluación Multi-Etiqueta.
+* **Módulo 5 y 6:** Visión Artificial (OpenCV) y Data Flywheel con recarga de memoria en caliente (In-Context Learning).
+* **Módulo 7:** Frontend interactivo multimodal desplegado con Gradio y validación Poka-Yoke.
+* **Módulo 8:** Generación automática de reportes visuales y gráficos (Alta resolución para métricas académicas).
 
 ## 🚀 Requisitos de Ejecución
 Para reproducir este entorno de pruebas:
