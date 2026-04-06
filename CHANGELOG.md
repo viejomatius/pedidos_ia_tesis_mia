@@ -2,6 +2,16 @@
 
 Todas las actualizaciones notables, decisiones arquitectónicas y mejoras en las métricas de este proyecto se documentarán en este archivo.
 
+## [V9.0] - 2026-04-05 (Jerarquía Cognitiva, Preservación de Atributos y Tolerancia a Fallos)
+### Añadido
+- **Jerarquía de Prompting (Regla Suprema 0):** Se implementó una jerarquía absoluta en las instrucciones del LLM (Módulo 3). Las "Lecciones Aprendidas" inyectadas por la memoria dinámica (HITL) ahora anulan explícitamente cualquier restricción del catálogo RAG recuperado, garantizando que el modelo acate el reentrenamiento *In-Context* sin conflictos de lógica.
+- **Búsqueda Segura en Memoria:** Se implementó `globals().get()` en el Módulo 3 para la instanciación de la memoria HITL. Esto evita dependencias cíclicas (`NameError`) permitiendo que el Módulo de Evaluación (Módulo 4) pueda ejecutarse "en frío" si el motor vectorial de memoria aún no ha sido inicializado, garantizando tolerancia a fallos.
+
+### Cambiado
+- **Mitigación de Inanición de Contexto (Context Starvation):** Se amplió la ventana de recuperación del motor híbrido de `k=10` a `k=15`, permitiendo procesar canastas B2B de hasta 5-6 productos simultáneos sin desplazar documentos relevantes del contexto del LLM.
+- **Prevención de Truncamiento de Atributos (Information Loss):** Se reescribió el prompt del *Query Rewriter*. El agente pre-procesador ahora tiene la orden estricta de preservar atributos técnicos (calibre, tipo, grosor, material), evitando que la pérdida de variables categóricas genere falsos negativos en el buscador FAISS/BM25.
+- **Calibración del Trade-Off (Precision-Recall):** Las nuevas restricciones cognitivas estabilizaron el F1-Score en el cuartil del 80%. Esta estabilización es producto de priorizar la "Alta Precisión" (postura conservadora del LLM que prefiere derivar a HITL antes que alucinar un SKU), alineando el modelo con la política de aversión al riesgo de la logística B2B.
+
 ## [V8.0] - 2026-04-05 (Orquestación DAG y Prevención de Errores de Estado)
 ### Añadido
 - **Orquestador de Dependencias (State Manager):** Se implementó la clase estática `OrquestadorPipeline` en el Módulo 1. Este componente actúa como un validador de Grafos Acíclicos Dirigidos (DAGs) en tiempo de ejecución. Verifica la existencia de variables globales (modelos, dataframes, motores FAISS) antes de permitir la ejecución de módulos dependientes. 
