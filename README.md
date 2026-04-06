@@ -32,8 +32,9 @@ Para reproducir este entorno de pruebas:
 * **Credenciales:** Se requiere configurar `OPENAI_API_KEY` en el gestor de secretos (Vault) del entorno.
 
 ## 📊 Métricas Objetivo (KPIs)
-* **Métricas Técnicas:** Optimización del F1-Score ponderado para clasificación Multi-Etiqueta, mitigando el *Data Drift*.
+* **Métricas Técnicas (Evaluación Multi-Etiqueta):** * Optimización del F1-Score ponderado mediante Búsqueda Híbrida y Expansión de Consultas.
+* **Precision-Recall Trade-Off:** El sistema está calibrado intencionalmente hacia la *Alta Precisión* (High Precision). Se prioriza el enrutamiento seguro hacia revisión humana (*Falsos Negativos* tolerables) por encima del riesgo de alucinación logística (*Falsos Positivos* críticos).
 * **Métricas de Negocio:** Reducción drástica del *Lead Time Operativo* (medido en segundos por transacción) y monitorización del Costo de Inferencia API (USD/req).
-
+* **Integridad de Datos:** Garantía de *Zero-Typo* en el Data Flywheel mediante interfaces de corrección Poka-Yoke ancladas a la tabla de dimensiones del ERP.
 ---
 *Desarrollado bajo los estándares de Calidad de Software ISO/IEC 25010 (Adecuación Funcional y Fiabilidad).*
