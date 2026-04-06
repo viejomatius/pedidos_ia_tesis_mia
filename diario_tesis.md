@@ -55,3 +55,10 @@ Este documento registra los desafíos, experimentos fallidos y decisiones arquit
 
 ### Visión a Futuro: El Siguiente Nivel (Re-Ranking)
 - **Nota para la defensa**: Si bien el Query Rewriting nos llevó al éxito actual, la investigación sugiere que para alcanzar el 99% de precisión deberíamos implementar un **Re-Ranker con Cross-Encoders**. Esto actuaría como un "juez" de Deep Learning para calificar la relevancia de los resultados recuperados antes de la generación final. Queda planteado como trabajo futuro.
+
+## 05 de Abril de 2026: UI, Inanición de Contexto y Estrategias de Reentrenamiento
+- **Problema detectado (Inanición de Contexto)**: Al probar con pedidos de más de 2 productos simultáneos ("pua perimetral y clavos corrugados"), la IA ignoraba la pua. Descubrimos que el `k=4` de FAISS era muy restrictivo; los ítems extra quedaban fuera de los 4 primeros resultados, causando *Context Starvation*. Subimos el `k=10` y el problema se resolvió.
+- **Mejora de UX (Poka-Yoke)**: Modificamos el Módulo 7 (Gradio). Escribir el JSON a mano era un riesgo inmenso de corrupción de datos. Cambiamos a *Combo Boxes* conectados a la tabla de dimensiones. Ahora el vendedor selecciona y el sistema reconstruye el JSON, asegurando integridad total antes de mandarlo al `.jsonl`.
+- **Decisión Arquitectónica (Estrategias de Reentrenamiento)**: Debatimos cómo hacer que la máquina "aprenda" del botón de guardar. 
+  - *Decisión actual:* Implementamos la **Estrategia 1 (RAG Dinámico / In-Context Learning)**. Vectorizamos el `.jsonl` en caliente. Si el usuario pide algo mal escrito que ya fue corregido ayer, el RAG lo detecta y le dice a la IA: *"Ayer un humano lo corrigió así, haz lo mismo"*. Funciona excelente para la PoC.
+  - *Reflexión a largo plazo:* Dejamos estipulado en la tesis que la **Estrategia 2 (Fine-Tuning)** es el objetivo de producción definitivo. Cuando acumulemos suficientes casos de borde en el JSONL, dejaremos de depender del prompt y reentrenaremos los pesos de la red, reduciendo el consumo de tokens y estabilizando el sistema para Ideal Alambrec.
