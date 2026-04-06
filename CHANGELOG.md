@@ -2,6 +2,18 @@
 
 Todas las actualizaciones notables, decisiones arquitectónicas y mejoras en las métricas de este proyecto se documentarán en este archivo.
 
+## [V7.0] - 2026-04-05 (UX/UI Poka-Yoke & Estrategia de Aprendizaje RAG)
+### Añadido
+- **Memoria Dinámica HITL (Estrategia 1 - In-Context Learning):** Implementación de un motor vectorial paralelo (FAISS) que indexa el archivo `dataset_finetuning_hitl.jsonl`. El sistema ahora recupera correcciones históricas hechas por humanos y las inyecta como ejemplos *Few-Shot* dinámicos en el prompt principal, permitiendo que el modelo "aprenda" en tiempo real sin necesidad de reentrenar pesos.
+- **Poka-Yoke Visual (Combo Boxes):** Interfaz de auditoría humana rediseñada. El usuario ahora corrige errores seleccionando SKUs directamente desde un Dropdown enlazado a la base de datos oficial, garantizando 100% de integridad de datos y evitando errores tipográficos en el dataset de reentrenamiento.
+- **Recálculo Transaccional en Vivo:** La UI ahora recalcula el stock y el razonamiento del sistema de forma automática al momento de aplicar una corrección humana.
+
+### Cambiado
+- **Mitigación de Inanición de Contexto (Context Starvation):** Se incrementó el hiperparámetro de recuperación `k=10` en los motores BM25 y FAISS para garantizar que los pedidos con múltiples ítems (canastas B2B) no excluyan documentos relevantes de la ventana de contexto del LLM.
+
+### Nota de Arquitectura (Roadmap a Largo Plazo)
+- **Aviso:** La actual Estrategia 1 (Memoria In-Context) es ideal para la fase de Prueba de Concepto (PoC) por su inmediatez y bajo costo. Sin embargo, a largo plazo, la arquitectura debe migrar a la **Estrategia 2 (Fine-Tuning / Ajuste Fino)**. Cuando el archivo `.jsonl` supere los 1,000 registros validados, se utilizará para modificar los pesos neuronales subyacentes de un modelo Open Source, eliminando la necesidad de inyectar contexto masivo en el prompt, reduciendo latencia y garantizando soberanía tecnológica.
+
 ## [V6.0] - 2026-04-05 (Optimización de Precisión)
 ### Añadido
 - **Agente de Query Rewriting (Pre-Retrieval):** Implementación de una etapa de pre-procesamiento mediante un LLM especializado que purifica, corrige y normaliza el input del usuario (OCR/Texto crudo) antes de la búsqueda.
