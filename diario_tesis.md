@@ -67,3 +67,15 @@ Este documento registra los desafíos, experimentos fallidos y decisiones arquit
 - **Decisión Arquitectónica (State Manager)**: En lugar de depender de instrucciones manuales, se programó un sistema defensivo. Desarrollamos la clase `OrquestadorPipeline` que funciona simulando la validación de dependencias de un DAG (como Apache Airflow). 
 - **Reflexión Técnica**: Cada módulo ahora verifica proactivamente si sus prerequisitos existen en la memoria (`globals()`). Si faltan, el orquestador aborta la ejecución con un mensaje de error controlado y corporativo. Esto eleva la robustez del entregable, demostrando principios de ingeniería de software (Poka-Yoke / Prevención de Errores) aplicados al despliegue de modelos de Machine Learning.
   - *Reflexión a largo plazo:* Dejamos estipulado en la tesis que la **Estrategia 2 (Fine-Tuning)** es el objetivo de producción definitivo. Cuando acumulemos suficientes casos de borde en el JSONL, dejaremos de depender del prompt y reentrenaremos los pesos de la red, reduciendo el consumo de tokens y estabilizando el sistema para Ideal Alambrec.
+
+## 05 de Abril de 2026 (Parte 2): Conflictos Cognitivos y Trade-Off Estadístico
+- **Problema detectado (Conflictos de Prompting y Truncamiento)**: Al procesar un pedido muy complejo con múltiples variables (*"postes concreto grueso de tipo 4"*), el sistema falló. Al forzar la corrección humana, el sistema **no aprendió** y volvió a fallar. Adicionalmente, el Módulo 4 de evaluación colapsó con un `NameError` al intentar evaluar.
+- **Análisis de Causa Raíz**: 
+  1. *Information Loss*: El *Query Rewriter* borraba adjetivos clave ("grueso", "tipo 4") creyendo que eran ruido, lo que rompía la búsqueda híbrida. 
+  2. *Conflicto de Leyes*: El prompt final priorizaba "solo usar el catálogo" por encima de la memoria HITL, por lo que el LLM desobedecía la corrección humana si no hallaba el producto exacto en el contexto.
+  3. *Dependencia Cíclica*: El Módulo 3 exigía la existencia de la memoria del Módulo 6, rompiendo la evaluación si esta última no estaba activa.
+- **Decisiones Arquitectónicas y Soluciones**: 
+  - Se implementó la **"Regla Suprema 0"** en el prompt, otorgando poder de veto a la memoria histórica sobre la recuperación RAG estándar.
+  - Se ordenó al pre-procesador la preservación estricta de atributos técnicos.
+  - Se blindó la variable de memoria con `globals().get()` para hacerla opcional y tolerante a fallos.
+- **Reflexión Técnica (El Trade-Off de Negocio)**: Observamos que el F1-Score se estabilizó en ~80%. Como ingenieros, comprendimos que esto no es un fallo, sino un **Precision-Recall Trade-Off**. Al hacer que las reglas del modelo sean extremadamente estrictas para que no adivine (High Precision), sacrificamos un poco de Recall (el modelo prefiere dudar y enviar a HITL). En el contexto B2B de Ideal Alambrec, un "Falso Negativo" (enviar a revisión) cuesta segundos de tiempo humano; pero un "Falso Positivo" (alucinar un SKU y despachar acero equivocado) cuesta miles de dólares. La arquitectura actual refleja exactamente la necesidad del negocio.
