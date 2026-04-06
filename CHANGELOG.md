@@ -2,6 +2,14 @@
 
 Todas las actualizaciones notables, decisiones arquitectónicas y mejoras en las métricas de este proyecto se documentarán en este archivo.
 
+## [V8.0] - 2026-04-05 (Orquestación DAG y Prevención de Errores de Estado)
+### Añadido
+- **Orquestador de Dependencias (State Manager):** Se implementó la clase estática `OrquestadorPipeline` en el Módulo 1. Este componente actúa como un validador de Grafos Acíclicos Dirigidos (DAGs) en tiempo de ejecución. Verifica la existencia de variables globales (modelos, dataframes, motores FAISS) antes de permitir la ejecución de módulos dependientes. 
+
+### Cambiado
+- **Refactorización de Módulos Periféricos:** Fusión arquitectónica de los Módulos 5 (Computer Vision) y 6 (Base de Datos HITL) en un solo bloque de ejecución para garantizar que el inicializador de memoria dinámica en caliente (`cargar_memoria_hitl`) disponga de las dependencias de pre-procesamiento visual antes de instanciar el frontend.
+- **Defensa contra Capa 8:** Se mitigaron los riesgos inherentes a los entornos Jupyter/Colab (ejecución no secuencial de celdas) mediante excepciones tempranas (`RuntimeError` semánticos), asegurando tolerancia a fallos en la demostración de la PoC.
+
 ## [V7.0] - 2026-04-05 (UX/UI Poka-Yoke & Estrategia de Aprendizaje RAG)
 ### Añadido
 - **Memoria Dinámica HITL (Estrategia 1 - In-Context Learning):** Implementación de un motor vectorial paralelo (FAISS) que indexa el archivo `dataset_finetuning_hitl.jsonl`. El sistema ahora recupera correcciones históricas hechas por humanos y las inyecta como ejemplos *Few-Shot* dinámicos en el prompt principal, permitiendo que el modelo "aprenda" en tiempo real sin necesidad de reentrenar pesos.
