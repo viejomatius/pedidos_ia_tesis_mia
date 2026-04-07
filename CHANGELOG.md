@@ -2,6 +2,20 @@
 
 Todas las actualizaciones notables, decisiones arquitectónicas y mejoras en las métricas de este proyecto se documentarán en este archivo.
 
+## [V11.0] - 2026-04-07 (Migración de OCR Tradicional a Modelos Multimodales VLM)
+### Cambiado
+- **Extracción de Datos de Órdenes de Compra:** Se deprecó el uso de Tesseract OCR y OpenCV en el Módulo 5. Debido a la pérdida de estructura espacial (Information Loss) inherente al OCR en documentos tabulares, se implementó inferencia multimodal directa utilizando la API de `gpt-4o`.
+- **Pre-procesamiento de Imágenes:** Se añadió la función de conversión de tensores NumPy a formato Base64 nativo en memoria intermedia (`BytesIO`), agilizando el envío de payloads visuales al endpoint del LLM sin requerir almacenamiento en disco.
+
+## [V10.0] - 2026-04-06 (Refactorización de Interfaz UX/UI y Progressive Disclosure)
+### Añadido
+- **Mapeo Visual Directo:** Se añadió la columna `Ítem #` a la tabla renderizada en HTML. Esta columna actúa como una llave primaria visual que vincula biunívocamente cada fila de la tabla con el menú desplegable del panel de auditoría (HITL), erradicando la fricción cognitiva durante la corrección manual.
+- **Flujo Guiado (Wizard Layout):** Reestructuración de la interfaz en `gr.Group` semánticos (Paso 1: Ingesta, Paso 2: Revisión, Paso 3: Auditoría) para alinear la herramienta con los flujos de trabajo tradicionales de un operador de ventas (Non-technical user).
+
+### Cambiado
+- **Progressive Disclosure:** El payload crudo (JSON) y los metadatos de telemetría (Costo/Tokens) se encapsularon dentro de un componente `gr.Accordion` (colapsado por defecto). Esto limpia la interfaz visual para el usuario de negocio, manteniendo la información accesible bajo demanda para el equipo de TI.
+- **Estilización de Estados:** Refinamiento del CSS inyectado en la tabla de resultados para mejorar la legibilidad del semáforo de colores (Verde/Amarillo/Rojo) asociado a las reglas de negocio del ERP.
+
 ## [V9.0] - 2026-04-05 (Jerarquía Cognitiva, Preservación de Atributos y Tolerancia a Fallos)
 ### Añadido
 - **Jerarquía de Prompting (Regla Suprema 0):** Se implementó una jerarquía absoluta en las instrucciones del LLM (Módulo 3). Las "Lecciones Aprendidas" inyectadas por la memoria dinámica (HITL) ahora anulan explícitamente cualquier restricción del catálogo RAG recuperado, garantizando que el modelo acate el reentrenamiento *In-Context* sin conflictos de lógica.
