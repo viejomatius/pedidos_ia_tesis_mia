@@ -88,3 +88,13 @@ Este documento registra los desafíos, experimentos fallidos y decisiones arquit
 - **Problema de Investigación**: En el contexto B2B, muchas órdenes de compra llegan en formato PDF o imágenes con tablas. El OCR tradicional leía las filas de forma asimétrica, mezclando las cantidades de un SKU con la descripción de la fila inferior.
 - **Decisión Arquitectónica**: Migramos la ingesta visual hacia un modelo fundacional multimodal (GPT-4o Vision). Mediante *Prompt Engineering* especializado, el VLM asume el rol de "Traductor Analítico", ignorando ruidos del documento (firmas, logos, direcciones fiscales) y serializando la tabla a una estructura de texto plano estandarizada.
 - **Impacto Metodológico**: Esto preserva la integridad del *Pipeline In-Context Learning* de los Módulos 3 y 4. Al homogenizar el *input* (sea texto o imagen, todo entra al motor RAG como un string purificado), garantizamos que la evaluación comparativa, las métricas de negocio y la interfaz de auditoría funcionen indistintamente del canal de origen de la transacción.
+
+## 08 de Abril de 2026: Ingeniería Cognitiva y el "Valle de la Muerte" de las Métricas
+- **Desafío Metodológico:** Al someter la arquitectura a un entorno de pruebas destructivas (Stress Test), observamos fluctuaciones extremas en el F1-Score, oscilando entre el 100% (sesgo de datos sintéticos), el 28% y el 53%.
+- **Diagnóstico Dual (Alineamiento de IA):**
+  1. *Alucinación Compensatoria:* El modelo intentaba adivinar SKUs omitidos por el cliente para mantener una alta tasa de resolución, generando Falsos Positivos críticos para la logística.
+  2. *Over-anchoring (Auditor Paranoico):* Al aplicar un prompt con penalizaciones estrictas para evitar que adivinara, el modelo `gpt-4o-mini` colapsó hacia la clase segura, enviando pedidos válidos a `REVISION_MANUAL` por miedo a equivocarse.
+- **Solución Arquitectónica:** - Se implementó **Chain of Thought (CoT)**, forzando al modelo a justificar su decisión de atributos en un JSON *antes* de seleccionar el SKU.
+  - Se rediseñó el prompt hacia un "Equilibrio Funcional", dándole al modelo el deber de ser eficiente cuando hay datos, y seguro cuando hay ambigüedad.
+  - Se refactorizó la matemática del evaluador usando la librería `Counter` para conteos multi-etiqueta exactos.
+- **Reflexión de Negocio:** Las métricas se estabilizaron en un ~84% de F1-Score. Comprendimos que forzar un 95%+ implicaría un sobreajuste (Overfitting). El 16% de "error" restante representa el **Ruido Irreductible** del sector ferretero: pedidos que son inherentemente ambiguos en el mundo real y que *deben* ser derivados al Human-In-The-Loop. El modelo alcanzó la madurez para producción con una latencia transaccional promedio de 7.8 segundos.
