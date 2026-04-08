@@ -2,6 +2,16 @@
 
 Todas las actualizaciones notables, decisiones arquitectónicas y mejoras en las métricas de este proyecto se documentarán en este archivo.
 
+## [V12.0] - 2026-04-08 (Alineamiento de Modelo, Chain of Thought y Estabilización de Métricas)
+### Añadido
+- **Zero-Shot Chain of Thought (CoT):** Se reestructuró la arquitectura cognitiva del Extractor (Módulo 3). Se introdujo la llave `analisis_previo` como primer elemento de la salida JSON, forzando al LLM a instanciar su ruta de razonamiento lógico antes de emitir un SKU. Esto mitigó el sesgo de adivinación ("Síndrome del Buen Vendedor").
+- **Prompts Equilibrados (Model Alignment):** Se calibró la función de recompensa semántica del prompt. Se reemplazó la penalización estricta (que causaba "Over-anchoring" y un colapso de F1 al 28%) por un mandato dual: "Automatizar la certeza y enrutar la ambigüedad", estabilizando el comportamiento del modelo.
+
+### Cambiado
+- **Refactorización Matemática del Stress Test (Chaos Monkey):** Se corrigió la lógica de evaluación del Módulo 4. La calificación mutli-etiqueta migró de Teoría de Conjuntos (`set()`) a Frecuencia Exacta (`collections.Counter()`) para soportar conteo de Verdaderos Positivos duplicados.
+- **Inyección de Ruido B2B Realista:** El algoritmo de estrés ahora elimina sistemáticamente variables numéricas (calibres, pulgadas, metros) para forzar una ambigüedad insalvable (Irreducible Noise), evitando penalizar a la IA por aciertos legítimos.
+- **Estabilización de Línea Base:** Con las correcciones matemáticas y cognitivas, el F1-Score se consolidó en la "Zona Ricitos de Oro" (~83.87%), con una latencia de inferencia de ~7.8 segundos por transacción (Reducción del Lead Time operativo superior al 95%).
+
 ## [V11.0] - 2026-04-07 (Migración de OCR Tradicional a Modelos Multimodales VLM)
 ### Cambiado
 - **Extracción de Datos de Órdenes de Compra:** Se deprecó el uso de Tesseract OCR y OpenCV en el Módulo 5. Debido a la pérdida de estructura espacial (Information Loss) inherente al OCR en documentos tabulares, se implementó inferencia multimodal directa utilizando la API de `gpt-4o`.
