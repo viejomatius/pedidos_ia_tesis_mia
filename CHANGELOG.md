@@ -2,6 +2,15 @@
 
 Todas las actualizaciones notables, decisiones arquitectónicas y mejoras en las métricas de este proyecto se documentarán en este archivo.
 
+## [V13.0] - 2026-04-15 (Benchmarking Cognitivo y Escalabilidad de Modelos Fronterizos)
+### Añadido
+- **Benchmarking de Modelos de Lenguaje (LLM vs SLM):** Se ejecutó un intercambio en caliente (*Hot-Swap*) del motor de inferencia en el Módulo 3, migrando de un Small Language Model (`gpt-4o-mini`) a un Frontier Model (`gpt-4o`) para evaluar el impacto en la resolución de ambigüedades.
+
+### Cambiado
+- **Superación del Techo Cognitivo:** Las métricas de la prueba de estrés (Módulo 4 con *Chaos Monkey*) experimentaron un salto cuantitativo. El F1-Score pasó del ~53% (sesgo de disponibilidad de contexto del modelo pequeño) al **70.83%**.
+- **Comportamiento Asintótico:** El sistema demostró que la arquitectura RAG y el *Prompting* de Cadena de Pensamiento (CoT) eran correctos, pero requerían la profundidad de razonamiento paramétrico de un modelo mayor para acatar estrictamente las restricciones negativas (no adivinar frente a la ambigüedad).
+- **Validación de Arquitectura:** Se comprobó el principio de "Separación de Responsabilidades" (Separation of Concerns). El código en Python se encarga exclusivamente del enrutamiento transaccional (Validación de Stock), confiando la decisión de confianza semántica íntegramente al LLM.
+
 ## [V12.0] - 2026-04-08 (Alineamiento de Modelo, Chain of Thought y Estabilización de Métricas)
 ### Añadido
 - **Zero-Shot Chain of Thought (CoT):** Se reestructuró la arquitectura cognitiva del Extractor (Módulo 3). Se introdujo la llave `analisis_previo` como primer elemento de la salida JSON, forzando al LLM a instanciar su ruta de razonamiento lógico antes de emitir un SKU. Esto mitigó el sesgo de adivinación ("Síndrome del Buen Vendedor").
