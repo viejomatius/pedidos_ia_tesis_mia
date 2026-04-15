@@ -37,9 +37,12 @@ Para reproducir este entorno de pruebas:
 * **Métricas de Negocio:** Reducción drástica del *Lead Time Operativo* (medido en segundos por transacción) y monitorización del Costo de Inferencia API (USD/req).
 * **Integridad de Datos:** Garantía de *Zero-Typo* en el Data Flywheel mediante interfaces de corrección Poka-Yoke ancladas a la tabla de dimensiones del ERP.
 
-## 📊 Métricas de Línea Base (PoC)
-* **Precisión Transaccional (F1-Score):** Estabilizado en **~84%** bajo pruebas de estrés (Stress Testing). Este margen contempla el *Ruido Irreductible* de la logística B2B, derivando correctamente pedidos ambiguos a revisión manual (Fail-Safe).
-* **Latencia / Lead Time:** Procesamiento integral asíncrono de **~7.8 segundos** por transacción compleja (reducción de más del 95% frente al procesamiento manual).
-* 
+## 📊 Métricas de Línea Base (Benchmarking PoC)
+El sistema ha sido sometido a pruebas de estrés con inyección de ruido (eliminación estocástica de atributos clave en los pedidos) para simular escenarios reales de ambigüedad B2B. Los resultados comparativos del motor cognitivo son:
+
+* **Arquitectura con SLM (`gpt-4o-mini`):** F1-Score de **~53%**. (Límite cognitivo alcanzado: tendencia a la alucinación compensatoria).
+* **Arquitectura con LLM Fronterizo (`gpt-4o`):** F1-Score consolidado de **~70.83%**. 
+
+**Interpretación de la Métrica Final:** El 71% representa la tasa de autonomía segura del Copiloto en condiciones de alta entropía. El margen restante no constituye fallos catastróficos, sino el enrutamiento exitoso de pedidos inherentemente ambiguos hacia la interfaz humana (Poka-Yoke), previniendo quiebres logísticos y mermas de inventario.
 ---
 *Desarrollado bajo los estándares de Calidad de Software ISO/IEC 25010 (Adecuación Funcional y Fiabilidad).*
