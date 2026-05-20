@@ -1,0 +1,3569 @@
+{
+  "metadata": {
+    "version_sistema": "v3",
+    "fecha": "2026-05-15T05:54:22.152715",
+    "n_casos": 50,
+    "seed": 42,
+    "k_retriever": 15,
+    "modelo_embeddings": "text-embedding-3-small",
+    "temperatura": 0.0,
+    "umbral_confianza_automatica": "Alta",
+    "peso_faiss": 0.5,
+    "peso_bm25": 0.5,
+    "rrf_k": 60,
+    "k_memoria_hitl": 3,
+    "umbral_similitud_hitl": 0.85,
+    "correcciones_tutor_aplicadas": [
+      "OBS-01_filtro_confianza_deterministico",
+      "OBS-02_metrica_dual_id_y_tx",
+      "OBS-03_reciprocal_rank_fusion",
+      "OBS-04_prompt_rewriter_v2",
+      "OBS-05_memoria_hitl_con_umbral",
+      "OBS-10_minimizacion_datos_GDPR",
+      "OBS-11_renombrado_archivo_hitl"
+    ]
+  },
+  "runs": {
+    "gpt-4o-mini": {
+      "agregadas": {
+        "modelo": "gpt-4o-mini",
+        "nombre_run": "v3_gpt-4o-mini",
+        "n_casos": 50,
+        "f1_macro": 0.7526666666666668,
+        "f1_id_macro": 0.7526666666666668,
+        "precision_id_macro": 0.7566666666666667,
+        "recall_id_macro": 0.75,
+        "f1_tx_macro": 0.2833333333333333,
+        "precision_tx_macro": 0.2833333333333333,
+        "recall_tx_macro": 0.2833333333333333,
+        "mae_cantidad_promedio": 9.92,
+        "tasa_acierto_perfecto_id": 0.58,
+        "tasa_acierto_perfecto_tx": 0.18,
+        "tasa_acierto_perfecto": 0.58,
+        "distribucion_errores": {
+          "derivacion_correcta": 26,
+          "alucinacion_sku": 9,
+          "acierto_perfecto": 9,
+          "derivacion_innecesaria": 6
+        },
+        "n_casos_con_ruido": 26,
+        "latencia_promedio_seg": 7.421299999999999,
+        "latencia_total_seg": 371.0729913711548,
+        "costo_total_usd": 0.024614399999999998,
+        "costo_promedio_usd": 0.000492288,
+        "tokens_totales": 125572,
+        "tokens_promedio": 2511.44,
+        "timestamp": "2026-05-15T06:00:33.225833"
+      },
+      "por_caso": [
+        {
+          "caso_id": "BENCH-001",
+          "pedido": "Por favor mándame 24 malla soldada del tipo",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              24
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 24.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 10.49,
+          "costo": 0.00037424999999999996
+        },
+        {
+          "caso_id": "BENCH-002",
+          "pedido": "Despachen 22 clavos ()",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              22
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 22.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 4.464,
+          "costo": 0.0003536999999999999
+        },
+        {
+          "caso_id": "BENCH-003",
+          "pedido": "Cotiza 1 grapas para cerca de calibre 14 (el normal) y 7 grampas de calibre 14 (el normal)",
+          "esperado": [
+            [
+              "GRP-1011",
+              1
+            ],
+            [
+              "GRP-1030",
+              7
+            ]
+          ],
+          "predicho": [
+            [
+              "GRP-1011",
+              1
+            ],
+            [
+              "GRP-1057",
+              7
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 0.5,
+            "recall_id": 0.5,
+            "f1_id": 0.5,
+            "precision_tx": 0.5,
+            "recall_tx": 0.5,
+            "f1_tx": 0.5,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "alucinacion_sku",
+          "latencia": 6.017,
+          "costo": 0.0005515499999999999
+        },
+        {
+          "caso_id": "BENCH-004",
+          "pedido": "Despachen 23 clavo corrugado del tipo",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              23
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 23.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 9.332,
+          "costo": 0.0003699
+        },
+        {
+          "caso_id": "BENCH-005",
+          "pedido": "Quiero 1 puntillas de acero del tipo y 23 malla de acero de (el normal)",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ],
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "CLV-1053",
+              1
+            ],
+            [
+              "REVISION_MANUAL",
+              23
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 0.5,
+            "recall_id": 0.5,
+            "f1_id": 0.5,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 23.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 6.908,
+          "costo": 0.0004820999999999999
+        },
+        {
+          "caso_id": "BENCH-006",
+          "pedido": "Por favor mándame 25 clavos ()",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              25
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 25.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 3.067,
+          "costo": 0.0003426
+        },
+        {
+          "caso_id": "BENCH-007",
+          "pedido": "Por favor mándame 12 poste de cemento (calibre 12) y 20 puntillas de acero del tipo fino",
+          "esperado": [
+            [
+              "PST-1031",
+              12
+            ],
+            [
+              "CLV-1101",
+              20
+            ]
+          ],
+          "predicho": [
+            [
+              "PST-1045",
+              12
+            ],
+            [
+              "CLV-1101",
+              20
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 0.5,
+            "recall_id": 0.5,
+            "f1_id": 0.5,
+            "precision_tx": 0.5,
+            "recall_tx": 0.5,
+            "f1_tx": 0.5,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "alucinacion_sku",
+          "latencia": 7.17,
+          "costo": 0.00044189999999999995
+        },
+        {
+          "caso_id": "BENCH-008",
+          "pedido": "Por favor mándame 13 puntillas de acero de calibre 14 (el normal) y 18 grampas grueso",
+          "esperado": [
+            [
+              "CLV-1038",
+              13
+            ],
+            [
+              "GRP-1025",
+              18
+            ]
+          ],
+          "predicho": [
+            [
+              "CLV-1038",
+              13
+            ],
+            [
+              "GRP-1025",
+              18
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 1.0,
+            "recall_tx": 1.0,
+            "f1_tx": 1.0,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "acierto_perfecto",
+          "latencia": 4.589,
+          "costo": 0.00044534999999999996
+        },
+        {
+          "caso_id": "BENCH-009",
+          "pedido": "Cotiza 19 grapas (fino) y 23 puntillas de acero (grueso) y 2 alambre para cercar (grueso)",
+          "esperado": [
+            [
+              "GRP-1105",
+              19
+            ],
+            [
+              "CLV-1056",
+              23
+            ],
+            [
+              "ALM-1021",
+              2
+            ]
+          ],
+          "predicho": [
+            [
+              "GRP-1105",
+              19
+            ],
+            [
+              "CLV-1056",
+              23
+            ],
+            [
+              "REVISION_MANUAL",
+              2
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 0.6666666666666666,
+            "recall_id": 0.6666666666666666,
+            "f1_id": 0.6666666666666666,
+            "precision_tx": 0.6666666666666666,
+            "recall_tx": 0.6666666666666666,
+            "f1_tx": 0.6666666666666666,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "derivacion_innecesaria",
+          "latencia": 17.474,
+          "costo": 0.0006742499999999999
+        },
+        {
+          "caso_id": "BENCH-010",
+          "pedido": "Quiero 4 sujetadores de alambre del tipo",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              4
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 4.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 2.639,
+          "costo": 0.00037739999999999996
+        },
+        {
+          "caso_id": "BENCH-011",
+          "pedido": "Por favor mándame 12 rejilla de metal del tipo calibre 14 y 7 parrilla (calibre 12)",
+          "esperado": [
+            [
+              "MLE-1048",
+              12
+            ],
+            [
+              "MLE-1103",
+              7
+            ]
+          ],
+          "predicho": [
+            [
+              "MLE-1048",
+              12
+            ],
+            [
+              "REVISION_MANUAL",
+              7
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 0.5,
+            "recall_id": 0.5,
+            "f1_id": 0.5,
+            "precision_tx": 0.5,
+            "recall_tx": 0.5,
+            "f1_tx": 0.5,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "derivacion_innecesaria",
+          "latencia": 8.069,
+          "costo": 0.0004587
+        },
+        {
+          "caso_id": "BENCH-012",
+          "pedido": "Cotiza 18 puntillas de acero de (el normal)",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              18
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 18.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 5.462,
+          "costo": 0.0004460999999999999
+        },
+        {
+          "caso_id": "BENCH-013",
+          "pedido": "Por favor mándame 21 pua perimetral alta resistencia y 22 alambre de puas del tipo calibre 14",
+          "esperado": [
+            [
+              "ALM-1080",
+              21
+            ],
+            [
+              "ALM-1065",
+              22
+            ]
+          ],
+          "predicho": [
+            [
+              "ALM-1080",
+              21
+            ],
+            [
+              "ALM-1097",
+              22
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 0.5,
+            "recall_id": 0.5,
+            "f1_id": 0.5,
+            "precision_tx": 0.5,
+            "recall_tx": 0.5,
+            "f1_tx": 0.5,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "alucinacion_sku",
+          "latencia": 7.111,
+          "costo": 0.0005702999999999999
+        },
+        {
+          "caso_id": "BENCH-014",
+          "pedido": "Por favor mándame 2 poste para alambrado",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              2
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 2.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 5.845,
+          "costo": 0.00035835
+        },
+        {
+          "caso_id": "BENCH-015",
+          "pedido": "Por favor mándame 19 grapas para cerca de (el normal)",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              19
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 19.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 4.811,
+          "costo": 0.0004403999999999999
+        },
+        {
+          "caso_id": "BENCH-016",
+          "pedido": "Por favor mándame 21 parrilla del tipo y 5 viga de hormigon de (el normal)",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ],
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              21
+            ],
+            [
+              "PST-1102",
+              5
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 0.5,
+            "recall_id": 0.5,
+            "f1_id": 0.5,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 21.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 6.24,
+          "costo": 0.0005279999999999999
+        },
+        {
+          "caso_id": "BENCH-017",
+          "pedido": "Cotiza 24 grapas para cerca calibre 14 y 19 pua perimetral (alta resistencia) y 12 sujetadores de alambre (calibre 14)",
+          "esperado": [
+            [
+              "GRP-1077",
+              24
+            ],
+            [
+              "ALM-1124",
+              19
+            ],
+            [
+              "GRP-1117",
+              12
+            ]
+          ],
+          "predicho": [
+            [
+              "GRP-1011",
+              24
+            ],
+            [
+              "ALM-1080",
+              19
+            ],
+            [
+              "GRP-1011",
+              12
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 0.0,
+            "recall_id": 0.0,
+            "f1_id": 0.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "alucinacion_sku",
+          "latencia": 17.165,
+          "costo": 0.0006209999999999999
+        },
+        {
+          "caso_id": "BENCH-018",
+          "pedido": "Necesito 16 poste para cerca del tipo calibre 14",
+          "esperado": [
+            [
+              "PST-1146",
+              16
+            ]
+          ],
+          "predicho": [
+            [
+              "PST-1146",
+              16
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 1.0,
+            "recall_tx": 1.0,
+            "f1_tx": 1.0,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "acierto_perfecto",
+          "latencia": 2.946,
+          "costo": 0.0004316999999999999
+        },
+        {
+          "caso_id": "BENCH-019",
+          "pedido": "Cotiza 21 sujetadores de alambre del tipo alta resistencia",
+          "esperado": [
+            [
+              "GRP-1046",
+              21
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              21
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 0.0,
+            "recall_id": 0.0,
+            "f1_id": 0.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "derivacion_innecesaria",
+          "latencia": 8.473,
+          "costo": 0.00045719999999999995
+        },
+        {
+          "caso_id": "BENCH-020",
+          "pedido": "Quiero 13 pua de calibre 12 (el normal) y 20 grapas para cerca alta resistencia",
+          "esperado": [
+            [
+              "ALM-1020",
+              13
+            ],
+            [
+              "GRP-1111",
+              20
+            ]
+          ],
+          "predicho": [
+            [
+              "ALM-1020",
+              13
+            ],
+            [
+              "GRP-1111",
+              20
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 1.0,
+            "recall_tx": 1.0,
+            "f1_tx": 1.0,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "acierto_perfecto",
+          "latencia": 8.219,
+          "costo": 0.0005223
+        },
+        {
+          "caso_id": "BENCH-021",
+          "pedido": "Por favor mándame 22 grampas de (el normal) y 22 alambre con espinas () y 25 alambre de puas (alta resistencia)",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ],
+            [
+              "REVISION_MANUAL",
+              0
+            ],
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "GRP-1135",
+              22
+            ],
+            [
+              "REVISION_MANUAL",
+              22
+            ],
+            [
+              "REVISION_MANUAL",
+              25
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 0.6666666666666666,
+            "recall_id": 0.6666666666666666,
+            "f1_id": 0.6666666666666666,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 47.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 12.964,
+          "costo": 0.0006487499999999999
+        },
+        {
+          "caso_id": "BENCH-022",
+          "pedido": "Por favor mándame 15 malla de acero de calibre 12 (el normal) y 24 grampas (calibre 14)",
+          "esperado": [
+            [
+              "MLE-1047",
+              15
+            ],
+            [
+              "GRP-1001",
+              24
+            ]
+          ],
+          "predicho": [
+            [
+              "MLE-1047",
+              15
+            ],
+            [
+              "GRP-1030",
+              24
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 0.5,
+            "recall_id": 0.5,
+            "f1_id": 0.5,
+            "precision_tx": 0.5,
+            "recall_tx": 0.5,
+            "f1_tx": 0.5,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "alucinacion_sku",
+          "latencia": 10.724,
+          "costo": 0.00054285
+        },
+        {
+          "caso_id": "BENCH-023",
+          "pedido": "Por favor mándame 4 malla de acero del tipo calibre 14",
+          "esperado": [
+            [
+              "MLE-1145",
+              4
+            ]
+          ],
+          "predicho": [
+            [
+              "MLE-1145",
+              4
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 1.0,
+            "recall_tx": 1.0,
+            "f1_tx": 1.0,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "acierto_perfecto",
+          "latencia": 3.514,
+          "costo": 0.00044039999999999997
+        },
+        {
+          "caso_id": "BENCH-024",
+          "pedido": "Despachen 5 clavo corrugado del tipo estándar y 25 clavos fuertes del tipo alta resistencia y 18 rejilla de metal del tipo calibre 14",
+          "esperado": [
+            [
+              "CLV-1058",
+              5
+            ],
+            [
+              "CLV-1109",
+              25
+            ],
+            [
+              "MLE-1048",
+              18
+            ]
+          ],
+          "predicho": [
+            [
+              "CLV-1067",
+              5
+            ],
+            [
+              "CLV-1109",
+              25
+            ],
+            [
+              "MLE-1048",
+              18
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 0.6666666666666666,
+            "recall_id": 0.6666666666666666,
+            "f1_id": 0.6666666666666666,
+            "precision_tx": 0.6666666666666666,
+            "recall_tx": 0.6666666666666666,
+            "f1_tx": 0.6666666666666666,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "alucinacion_sku",
+          "latencia": 13.313,
+          "costo": 0.0006819
+        },
+        {
+          "caso_id": "BENCH-025",
+          "pedido": "Cotiza 16 malla de acero () y 4 sujetadores de alambre de (el normal) y 10 grapas ()",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ],
+            [
+              "REVISION_MANUAL",
+              0
+            ],
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              4
+            ],
+            [
+              "REVISION_MANUAL",
+              10
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 0.6666666666666666,
+            "f1_id": 0.8,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 14.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 8.792,
+          "costo": 0.0005367
+        },
+        {
+          "caso_id": "BENCH-026",
+          "pedido": "Quiero 3 grampas grueso y 3 pua del tipo estándar y 5 clavo para madera (fino)",
+          "esperado": [
+            [
+              "GRP-1025",
+              3
+            ],
+            [
+              "ALM-1140",
+              3
+            ],
+            [
+              "CLV-1039",
+              5
+            ]
+          ],
+          "predicho": [
+            [
+              "GRP-1025",
+              3
+            ],
+            [
+              "ALM-1006",
+              3
+            ],
+            [
+              "CLV-1024",
+              5
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 0.3333333333333333,
+            "recall_id": 0.3333333333333333,
+            "f1_id": 0.3333333333333333,
+            "precision_tx": 0.3333333333333333,
+            "recall_tx": 0.3333333333333333,
+            "f1_tx": 0.3333333333333333,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "alucinacion_sku",
+          "latencia": 7.791,
+          "costo": 0.00061725
+        },
+        {
+          "caso_id": "BENCH-027",
+          "pedido": "Despachen 17 grapas para cerca",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              17
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 17.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 6.548,
+          "costo": 0.00042689999999999997
+        },
+        {
+          "caso_id": "BENCH-028",
+          "pedido": "Por favor mándame 23 clavo para madera",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              23
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 23.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 4.616,
+          "costo": 0.00042464999999999994
+        },
+        {
+          "caso_id": "BENCH-029",
+          "pedido": "Cotiza 17 alambre con espinas () y 4 viga de hormigon alta resistencia",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ],
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              17
+            ],
+            [
+              "PST-1130",
+              4
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 0.5,
+            "recall_id": 0.5,
+            "f1_id": 0.5,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 17.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 6.839,
+          "costo": 0.0005182499999999999
+        },
+        {
+          "caso_id": "BENCH-030",
+          "pedido": "Cotiza 19 sujetadores de alambre del tipo y 19 poste para alambrado",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ],
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              19
+            ],
+            [
+              "REVISION_MANUAL",
+              19
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 38.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 5.327,
+          "costo": 0.00051945
+        },
+        {
+          "caso_id": "BENCH-031",
+          "pedido": "Necesito 3 poste para alambrado calibre 14",
+          "esperado": [
+            [
+              "PST-1068",
+              3
+            ]
+          ],
+          "predicho": [
+            [
+              "PST-1068",
+              3
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 1.0,
+            "recall_tx": 1.0,
+            "f1_tx": 1.0,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "acierto_perfecto",
+          "latencia": 4.755,
+          "costo": 0.00043065
+        },
+        {
+          "caso_id": "BENCH-032",
+          "pedido": "Por favor mándame 8 grampas del tipo fino",
+          "esperado": [
+            [
+              "GRP-1147",
+              8
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              8
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 0.0,
+            "recall_id": 0.0,
+            "f1_id": 0.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "derivacion_innecesaria",
+          "latencia": 4.48,
+          "costo": 0.0004485
+        },
+        {
+          "caso_id": "BENCH-033",
+          "pedido": "Despachen 24 pilar (alta resistencia)",
+          "esperado": [
+            [
+              "PST-1040",
+              24
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              24
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 0.0,
+            "recall_id": 0.0,
+            "f1_id": 0.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "derivacion_innecesaria",
+          "latencia": 6.335,
+          "costo": 0.00042825000000000003
+        },
+        {
+          "caso_id": "BENCH-034",
+          "pedido": "Cotiza 14 rejilla de metal ()",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              14
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 14.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 5.32,
+          "costo": 0.0004401
+        },
+        {
+          "caso_id": "BENCH-035",
+          "pedido": "Necesito 14 parrilla (calibre 12) y 15 malla para hormigon del tipo alta resistencia",
+          "esperado": [
+            [
+              "MLE-1103",
+              14
+            ],
+            [
+              "MLE-1120",
+              15
+            ]
+          ],
+          "predicho": [
+            [
+              "MLE-1103",
+              14
+            ],
+            [
+              "MLE-1120",
+              15
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 1.0,
+            "recall_tx": 1.0,
+            "f1_tx": 1.0,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "acierto_perfecto",
+          "latencia": 9.066,
+          "costo": 0.0005749499999999999
+        },
+        {
+          "caso_id": "BENCH-036",
+          "pedido": "Por favor mándame 13 poste para alambrado estándar",
+          "esperado": [
+            [
+              "PST-1019",
+              13
+            ]
+          ],
+          "predicho": [
+            [
+              "PST-1019",
+              13
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 1.0,
+            "recall_tx": 1.0,
+            "f1_tx": 1.0,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "acierto_perfecto",
+          "latencia": 4.763,
+          "costo": 0.00043499999999999995
+        },
+        {
+          "caso_id": "BENCH-037",
+          "pedido": "Cotiza 7 poste para alambrado de calibre 12 (el normal)",
+          "esperado": [
+            [
+              "PST-1073",
+              7
+            ]
+          ],
+          "predicho": [
+            [
+              "PST-1073",
+              7
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 1.0,
+            "recall_tx": 1.0,
+            "f1_tx": 1.0,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "acierto_perfecto",
+          "latencia": 4.669,
+          "costo": 0.00046679999999999996
+        },
+        {
+          "caso_id": "BENCH-038",
+          "pedido": "Por favor mándame 6 viga de hormigon",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              6
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 6.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 4.625,
+          "costo": 0.00044369999999999994
+        },
+        {
+          "caso_id": "BENCH-039",
+          "pedido": "Necesito 18 rejilla de metal",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              18
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 18.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 6.519,
+          "costo": 0.0004427999999999999
+        },
+        {
+          "caso_id": "BENCH-040",
+          "pedido": "Quiero 3 poste para alambrado () y 6 pilar () y 16 poste para cerca del tipo",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ],
+            [
+              "REVISION_MANUAL",
+              0
+            ],
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              3
+            ],
+            [
+              "REVISION_MANUAL",
+              6
+            ],
+            [
+              "REVISION_MANUAL",
+              16
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 25.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 7.586,
+          "costo": 0.0006207
+        },
+        {
+          "caso_id": "BENCH-041",
+          "pedido": "Quiero 6 poste para alambrado y 1 grapas para cerca alta resistencia",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ],
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              6
+            ],
+            [
+              "GRP-1111",
+              1
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 0.5,
+            "recall_id": 0.5,
+            "f1_id": 0.5,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 6.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 10.631,
+          "costo": 0.00050115
+        },
+        {
+          "caso_id": "BENCH-042",
+          "pedido": "Cotiza 14 viga de hormigon y 5 pua del tipo",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ],
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              14
+            ],
+            [
+              "REVISION_MANUAL",
+              5
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 19.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 10.962,
+          "costo": 0.0005473499999999999
+        },
+        {
+          "caso_id": "BENCH-043",
+          "pedido": "Por favor mándame 24 poste para alambrado",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              24
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 24.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 4.711,
+          "costo": 0.00042375
+        },
+        {
+          "caso_id": "BENCH-044",
+          "pedido": "Cotiza 17 grapas para cerca del tipo y 2 malla de acero de (el normal) y 3 poste para cerca del tipo",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ],
+            [
+              "REVISION_MANUAL",
+              0
+            ],
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              17
+            ],
+            [
+              "REVISION_MANUAL",
+              2
+            ],
+            [
+              "REVISION_MANUAL",
+              3
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 22.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 12.463,
+          "costo": 0.0006254999999999999
+        },
+        {
+          "caso_id": "BENCH-045",
+          "pedido": "Necesito 13 pilar (calibre 14)",
+          "esperado": [
+            [
+              "PST-1070",
+              13
+            ]
+          ],
+          "predicho": [
+            [
+              "PST-1068",
+              13
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 0.0,
+            "recall_id": 0.0,
+            "f1_id": 0.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "alucinacion_sku",
+          "latencia": 3.188,
+          "costo": 0.00044489999999999997
+        },
+        {
+          "caso_id": "BENCH-046",
+          "pedido": "Despachen 19 poste para alambrado de calibre 12 (el normal) y 20 clavo para madera de grueso (el normal) y 14 grampas grueso",
+          "esperado": [
+            [
+              "PST-1073",
+              19
+            ],
+            [
+              "CLV-1014",
+              20
+            ],
+            [
+              "GRP-1025",
+              14
+            ]
+          ],
+          "predicho": [
+            [
+              "PST-1073",
+              19
+            ],
+            [
+              "CLV-1014",
+              20
+            ],
+            [
+              "GRP-1030",
+              14
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 0.6666666666666666,
+            "recall_id": 0.6666666666666666,
+            "f1_id": 0.6666666666666666,
+            "precision_tx": 0.6666666666666666,
+            "recall_tx": 0.6666666666666666,
+            "f1_tx": 0.6666666666666666,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "alucinacion_sku",
+          "latencia": 7.62,
+          "costo": 0.0006341999999999999
+        },
+        {
+          "caso_id": "BENCH-047",
+          "pedido": "Por favor mándame 7 grapas () y 8 malla soldada",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ],
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              7
+            ],
+            [
+              "REVISION_MANUAL",
+              8
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 15.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 10.62,
+          "costo": 0.0005323499999999999
+        },
+        {
+          "caso_id": "BENCH-048",
+          "pedido": "Quiero 11 viga de hormigon de calibre 12 (el normal) y 1 grapas del tipo fino",
+          "esperado": [
+            [
+              "PST-1132",
+              11
+            ],
+            [
+              "GRP-1022",
+              1
+            ]
+          ],
+          "predicho": [
+            [
+              "PST-1132",
+              11
+            ],
+            [
+              "GRP-1022",
+              1
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 1.0,
+            "recall_tx": 1.0,
+            "f1_tx": 1.0,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "acierto_perfecto",
+          "latencia": 7.795,
+          "costo": 0.0005440499999999999
+        },
+        {
+          "caso_id": "BENCH-049",
+          "pedido": "Por favor mándame 3 poste para cerca alta resistencia y 17 grapas para cerca de fino (el normal) y 5 grapas para cerca calibre 14",
+          "esperado": [
+            [
+              "PST-1032",
+              3
+            ],
+            [
+              "GRP-1062",
+              17
+            ],
+            [
+              "GRP-1077",
+              5
+            ]
+          ],
+          "predicho": [
+            [
+              "PST-1032",
+              3
+            ],
+            [
+              "GRP-1098",
+              17
+            ],
+            [
+              "REVISION_MANUAL",
+              5
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 0.3333333333333333,
+            "recall_id": 0.3333333333333333,
+            "f1_id": 0.3333333333333333,
+            "precision_tx": 0.3333333333333333,
+            "recall_tx": 0.3333333333333333,
+            "f1_tx": 0.3333333333333333,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "derivacion_innecesaria",
+          "latencia": 10.369,
+          "costo": 0.0005857499999999999
+        },
+        {
+          "caso_id": "BENCH-050",
+          "pedido": "Cotiza 10 clavos de (el normal)",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              10
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 10.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 7.669,
+          "costo": 0.00043979999999999996
+        }
+      ]
+    },
+    "gpt-4o": {
+      "agregadas": {
+        "modelo": "gpt-4o",
+        "nombre_run": "v3_gpt-4o",
+        "n_casos": 50,
+        "f1_macro": 0.7633333333333334,
+        "f1_id_macro": 0.7633333333333334,
+        "precision_id_macro": 0.7633333333333334,
+        "recall_id_macro": 0.7633333333333334,
+        "f1_tx_macro": 0.3066666666666667,
+        "precision_tx_macro": 0.3066666666666667,
+        "recall_tx_macro": 0.3066666666666667,
+        "mae_cantidad_promedio": 9.3,
+        "tasa_acierto_perfecto_id": 0.62,
+        "tasa_acierto_perfecto_tx": 0.22,
+        "tasa_acierto_perfecto": 0.62,
+        "distribucion_errores": {
+          "derivacion_correcta": 25,
+          "acierto_perfecto": 11,
+          "derivacion_innecesaria": 10,
+          "alucinacion_sku": 3,
+          "falla_no_deriva": 1
+        },
+        "n_casos_con_ruido": 26,
+        "latencia_promedio_seg": 4.169339999999998,
+        "latencia_total_seg": 208.4739956855774,
+        "costo_total_usd": 0.424895,
+        "costo_promedio_usd": 0.008497900000000001,
+        "tokens_totales": 125753,
+        "tokens_promedio": 2515.06,
+        "timestamp": "2026-05-15T06:04:01.702977"
+      },
+      "por_caso": [
+        {
+          "caso_id": "BENCH-001",
+          "pedido": "Por favor mándame 24 malla soldada del tipo",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              24
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 24.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 4.925,
+          "costo": 0.0074075
+        },
+        {
+          "caso_id": "BENCH-002",
+          "pedido": "Despachen 22 clavos ()",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              22
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 22.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 3.287,
+          "costo": 0.007185
+        },
+        {
+          "caso_id": "BENCH-003",
+          "pedido": "Cotiza 1 grapas para cerca de calibre 14 (el normal) y 7 grampas de calibre 14 (el normal)",
+          "esperado": [
+            [
+              "GRP-1011",
+              1
+            ],
+            [
+              "GRP-1030",
+              7
+            ]
+          ],
+          "predicho": [
+            [
+              "GRP-1011",
+              1
+            ],
+            [
+              "GRP-1030",
+              7
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 1.0,
+            "recall_tx": 1.0,
+            "f1_tx": 1.0,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "acierto_perfecto",
+          "latencia": 4.533,
+          "costo": 0.009775
+        },
+        {
+          "caso_id": "BENCH-004",
+          "pedido": "Despachen 23 clavo corrugado del tipo",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              23
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 23.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 3.036,
+          "costo": 0.007525
+        },
+        {
+          "caso_id": "BENCH-005",
+          "pedido": "Quiero 1 puntillas de acero del tipo y 23 malla de acero de (el normal)",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ],
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              1
+            ],
+            [
+              "MLE-1047",
+              23
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 0.5,
+            "recall_id": 0.5,
+            "f1_id": 0.5,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 1.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 6.855,
+          "costo": 0.0087125
+        },
+        {
+          "caso_id": "BENCH-006",
+          "pedido": "Por favor mándame 25 clavos ()",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              25
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 25.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 2.567,
+          "costo": 0.00719
+        },
+        {
+          "caso_id": "BENCH-007",
+          "pedido": "Por favor mándame 12 poste de cemento (calibre 12) y 20 puntillas de acero del tipo fino",
+          "esperado": [
+            [
+              "PST-1031",
+              12
+            ],
+            [
+              "CLV-1101",
+              20
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              12
+            ],
+            [
+              "CLV-1101",
+              20
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 0.5,
+            "recall_id": 0.5,
+            "f1_id": 0.5,
+            "precision_tx": 0.5,
+            "recall_tx": 0.5,
+            "f1_tx": 0.5,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "derivacion_innecesaria",
+          "latencia": 6.309,
+          "costo": 0.009425
+        },
+        {
+          "caso_id": "BENCH-008",
+          "pedido": "Por favor mándame 13 puntillas de acero de calibre 14 (el normal) y 18 grampas grueso",
+          "esperado": [
+            [
+              "CLV-1038",
+              13
+            ],
+            [
+              "GRP-1025",
+              18
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              13
+            ],
+            [
+              "GRP-1025",
+              18
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 0.5,
+            "recall_id": 0.5,
+            "f1_id": 0.5,
+            "precision_tx": 0.5,
+            "recall_tx": 0.5,
+            "f1_tx": 0.5,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "derivacion_innecesaria",
+          "latencia": 3.644,
+          "costo": 0.0090225
+        },
+        {
+          "caso_id": "BENCH-009",
+          "pedido": "Cotiza 19 grapas (fino) y 23 puntillas de acero (grueso) y 2 alambre para cercar (grueso)",
+          "esperado": [
+            [
+              "GRP-1105",
+              19
+            ],
+            [
+              "CLV-1056",
+              23
+            ],
+            [
+              "ALM-1021",
+              2
+            ]
+          ],
+          "predicho": [
+            [
+              "GRP-1105",
+              19
+            ],
+            [
+              "CLV-1056",
+              23
+            ],
+            [
+              "ALM-1021",
+              2
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 1.0,
+            "recall_tx": 1.0,
+            "f1_tx": 1.0,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "acierto_perfecto",
+          "latencia": 3.474,
+          "costo": 0.009797499999999999
+        },
+        {
+          "caso_id": "BENCH-010",
+          "pedido": "Quiero 4 sujetadores de alambre del tipo",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              4
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 4.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 2.876,
+          "costo": 0.007500000000000001
+        },
+        {
+          "caso_id": "BENCH-011",
+          "pedido": "Por favor mándame 12 rejilla de metal del tipo calibre 14 y 7 parrilla (calibre 12)",
+          "esperado": [
+            [
+              "MLE-1048",
+              12
+            ],
+            [
+              "MLE-1103",
+              7
+            ]
+          ],
+          "predicho": [
+            [
+              "MLE-1145",
+              12
+            ],
+            [
+              "MLE-1103",
+              7
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 0.5,
+            "recall_id": 0.5,
+            "f1_id": 0.5,
+            "precision_tx": 0.5,
+            "recall_tx": 0.5,
+            "f1_tx": 0.5,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "alucinacion_sku",
+          "latencia": 5.437,
+          "costo": 0.0093325
+        },
+        {
+          "caso_id": "BENCH-012",
+          "pedido": "Cotiza 18 puntillas de acero de (el normal)",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              18
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 18.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 3.046,
+          "costo": 0.007975
+        },
+        {
+          "caso_id": "BENCH-013",
+          "pedido": "Por favor mándame 21 pua perimetral alta resistencia y 22 alambre de puas del tipo calibre 14",
+          "esperado": [
+            [
+              "ALM-1080",
+              21
+            ],
+            [
+              "ALM-1065",
+              22
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              21
+            ],
+            [
+              "REVISION_MANUAL",
+              22
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 0.0,
+            "recall_id": 0.0,
+            "f1_id": 0.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "derivacion_innecesaria",
+          "latencia": 4.232,
+          "costo": 0.009295000000000001
+        },
+        {
+          "caso_id": "BENCH-014",
+          "pedido": "Por favor mándame 2 poste para alambrado",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              2
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 2.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 2.646,
+          "costo": 0.0073025
+        },
+        {
+          "caso_id": "BENCH-015",
+          "pedido": "Por favor mándame 19 grapas para cerca de (el normal)",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              19
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 19.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 2.158,
+          "costo": 0.0072775
+        },
+        {
+          "caso_id": "BENCH-016",
+          "pedido": "Por favor mándame 21 parrilla del tipo y 5 viga de hormigon de (el normal)",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ],
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "MLE-1116",
+              21
+            ],
+            [
+              "PST-1132",
+              5
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 0.0,
+            "recall_id": 0.0,
+            "f1_id": 0.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "falla_no_deriva",
+          "latencia": 4.281,
+          "costo": 0.009070000000000002
+        },
+        {
+          "caso_id": "BENCH-017",
+          "pedido": "Cotiza 24 grapas para cerca calibre 14 y 19 pua perimetral (alta resistencia) y 12 sujetadores de alambre (calibre 14)",
+          "esperado": [
+            [
+              "GRP-1077",
+              24
+            ],
+            [
+              "ALM-1124",
+              19
+            ],
+            [
+              "GRP-1117",
+              12
+            ]
+          ],
+          "predicho": [
+            [
+              "GRP-1011",
+              24
+            ],
+            [
+              "ALM-1080",
+              19
+            ],
+            [
+              "GRP-1117",
+              12
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 0.3333333333333333,
+            "recall_id": 0.3333333333333333,
+            "f1_id": 0.3333333333333333,
+            "precision_tx": 0.3333333333333333,
+            "recall_tx": 0.3333333333333333,
+            "f1_tx": 0.3333333333333333,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "alucinacion_sku",
+          "latencia": 4.443,
+          "costo": 0.010637500000000001
+        },
+        {
+          "caso_id": "BENCH-018",
+          "pedido": "Necesito 16 poste para cerca del tipo calibre 14",
+          "esperado": [
+            [
+              "PST-1146",
+              16
+            ]
+          ],
+          "predicho": [
+            [
+              "PST-1146",
+              16
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 1.0,
+            "recall_tx": 1.0,
+            "f1_tx": 1.0,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "acierto_perfecto",
+          "latencia": 3.917,
+          "costo": 0.00792
+        },
+        {
+          "caso_id": "BENCH-019",
+          "pedido": "Cotiza 21 sujetadores de alambre del tipo alta resistencia",
+          "esperado": [
+            [
+              "GRP-1046",
+              21
+            ]
+          ],
+          "predicho": [
+            [
+              "GRP-1046",
+              21
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 1.0,
+            "recall_tx": 1.0,
+            "f1_tx": 1.0,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "acierto_perfecto",
+          "latencia": 3.304,
+          "costo": 0.0075575
+        },
+        {
+          "caso_id": "BENCH-020",
+          "pedido": "Quiero 13 pua de calibre 12 (el normal) y 20 grapas para cerca alta resistencia",
+          "esperado": [
+            [
+              "ALM-1020",
+              13
+            ],
+            [
+              "GRP-1111",
+              20
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              13
+            ],
+            [
+              "GRP-1111",
+              20
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 0.5,
+            "recall_id": 0.5,
+            "f1_id": 0.5,
+            "precision_tx": 0.5,
+            "recall_tx": 0.5,
+            "f1_tx": 0.5,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "derivacion_innecesaria",
+          "latencia": 3.633,
+          "costo": 0.0099875
+        },
+        {
+          "caso_id": "BENCH-021",
+          "pedido": "Por favor mándame 22 grampas de (el normal) y 22 alambre con espinas () y 25 alambre de puas (alta resistencia)",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ],
+            [
+              "REVISION_MANUAL",
+              0
+            ],
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "GRP-1135",
+              22
+            ],
+            [
+              "REVISION_MANUAL",
+              22
+            ],
+            [
+              "REVISION_MANUAL",
+              25
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 0.6666666666666666,
+            "recall_id": 0.6666666666666666,
+            "f1_id": 0.6666666666666666,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 47.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 7.699,
+          "costo": 0.0103825
+        },
+        {
+          "caso_id": "BENCH-022",
+          "pedido": "Por favor mándame 15 malla de acero de calibre 12 (el normal) y 24 grampas (calibre 14)",
+          "esperado": [
+            [
+              "MLE-1047",
+              15
+            ],
+            [
+              "GRP-1001",
+              24
+            ]
+          ],
+          "predicho": [
+            [
+              "MLE-1047",
+              15
+            ],
+            [
+              "GRP-1001",
+              24
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 1.0,
+            "recall_tx": 1.0,
+            "f1_tx": 1.0,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "acierto_perfecto",
+          "latencia": 5.082,
+          "costo": 0.0093775
+        },
+        {
+          "caso_id": "BENCH-023",
+          "pedido": "Por favor mándame 4 malla de acero del tipo calibre 14",
+          "esperado": [
+            [
+              "MLE-1145",
+              4
+            ]
+          ],
+          "predicho": [
+            [
+              "MLE-1145",
+              4
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 1.0,
+            "recall_tx": 1.0,
+            "f1_tx": 1.0,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "acierto_perfecto",
+          "latencia": 4.106,
+          "costo": 0.007647500000000001
+        },
+        {
+          "caso_id": "BENCH-024",
+          "pedido": "Despachen 5 clavo corrugado del tipo estándar y 25 clavos fuertes del tipo alta resistencia y 18 rejilla de metal del tipo calibre 14",
+          "esperado": [
+            [
+              "CLV-1058",
+              5
+            ],
+            [
+              "CLV-1109",
+              25
+            ],
+            [
+              "MLE-1048",
+              18
+            ]
+          ],
+          "predicho": [
+            [
+              "CLV-1058",
+              5
+            ],
+            [
+              "CLV-1109",
+              25
+            ],
+            [
+              "MLE-1048",
+              18
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 1.0,
+            "recall_tx": 1.0,
+            "f1_tx": 1.0,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "acierto_perfecto",
+          "latencia": 4.772,
+          "costo": 0.009885
+        },
+        {
+          "caso_id": "BENCH-025",
+          "pedido": "Cotiza 16 malla de acero () y 4 sujetadores de alambre de (el normal) y 10 grapas ()",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ],
+            [
+              "REVISION_MANUAL",
+              0
+            ],
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              16
+            ],
+            [
+              "GRP-1007",
+              4
+            ],
+            [
+              "REVISION_MANUAL",
+              10
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 0.6666666666666666,
+            "recall_id": 0.6666666666666666,
+            "f1_id": 0.6666666666666666,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 26.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 4.733,
+          "costo": 0.009955
+        },
+        {
+          "caso_id": "BENCH-026",
+          "pedido": "Quiero 3 grampas grueso y 3 pua del tipo estándar y 5 clavo para madera (fino)",
+          "esperado": [
+            [
+              "GRP-1025",
+              3
+            ],
+            [
+              "ALM-1140",
+              3
+            ],
+            [
+              "CLV-1039",
+              5
+            ]
+          ],
+          "predicho": [
+            [
+              "GRP-1025",
+              3
+            ],
+            [
+              "ALM-1140",
+              3
+            ],
+            [
+              "CLV-1039",
+              5
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 1.0,
+            "recall_tx": 1.0,
+            "f1_tx": 1.0,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "acierto_perfecto",
+          "latencia": 3.315,
+          "costo": 0.0101675
+        },
+        {
+          "caso_id": "BENCH-027",
+          "pedido": "Despachen 17 grapas para cerca",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              17
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 17.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 2.065,
+          "costo": 0.007195000000000001
+        },
+        {
+          "caso_id": "BENCH-028",
+          "pedido": "Por favor mándame 23 clavo para madera",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              23
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 23.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 2.969,
+          "costo": 0.0071874999999999994
+        },
+        {
+          "caso_id": "BENCH-029",
+          "pedido": "Cotiza 17 alambre con espinas () y 4 viga de hormigon alta resistencia",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ],
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              17
+            ],
+            [
+              "PST-1130",
+              4
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 0.5,
+            "recall_id": 0.5,
+            "f1_id": 0.5,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 17.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 5.976,
+          "costo": 0.0085575
+        },
+        {
+          "caso_id": "BENCH-030",
+          "pedido": "Cotiza 19 sujetadores de alambre del tipo y 19 poste para alambrado",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ],
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              19
+            ],
+            [
+              "REVISION_MANUAL",
+              19
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 38.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 3.906,
+          "costo": 0.008685
+        },
+        {
+          "caso_id": "BENCH-031",
+          "pedido": "Necesito 3 poste para alambrado calibre 14",
+          "esperado": [
+            [
+              "PST-1068",
+              3
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              3
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 0.0,
+            "recall_id": 0.0,
+            "f1_id": 0.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "derivacion_innecesaria",
+          "latencia": 4.242,
+          "costo": 0.007702499999999999
+        },
+        {
+          "caso_id": "BENCH-032",
+          "pedido": "Por favor mándame 8 grampas del tipo fino",
+          "esperado": [
+            [
+              "GRP-1147",
+              8
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              8
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 0.0,
+            "recall_id": 0.0,
+            "f1_id": 0.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "derivacion_innecesaria",
+          "latencia": 2.258,
+          "costo": 0.007345
+        },
+        {
+          "caso_id": "BENCH-033",
+          "pedido": "Despachen 24 pilar (alta resistencia)",
+          "esperado": [
+            [
+              "PST-1040",
+              24
+            ]
+          ],
+          "predicho": [
+            [
+              "PST-1040",
+              24
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 1.0,
+            "recall_tx": 1.0,
+            "f1_tx": 1.0,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "acierto_perfecto",
+          "latencia": 2.576,
+          "costo": 0.0070775000000000005
+        },
+        {
+          "caso_id": "BENCH-034",
+          "pedido": "Cotiza 14 rejilla de metal ()",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              14
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 14.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 2.284,
+          "costo": 0.007205
+        },
+        {
+          "caso_id": "BENCH-035",
+          "pedido": "Necesito 14 parrilla (calibre 12) y 15 malla para hormigon del tipo alta resistencia",
+          "esperado": [
+            [
+              "MLE-1103",
+              14
+            ],
+            [
+              "MLE-1120",
+              15
+            ]
+          ],
+          "predicho": [
+            [
+              "MLE-1103",
+              14
+            ],
+            [
+              "REVISION_MANUAL",
+              15
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 0.5,
+            "recall_id": 0.5,
+            "f1_id": 0.5,
+            "precision_tx": 0.5,
+            "recall_tx": 0.5,
+            "f1_tx": 0.5,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "derivacion_innecesaria",
+          "latencia": 4.224,
+          "costo": 0.009085000000000001
+        },
+        {
+          "caso_id": "BENCH-036",
+          "pedido": "Por favor mándame 13 poste para alambrado estándar",
+          "esperado": [
+            [
+              "PST-1019",
+              13
+            ]
+          ],
+          "predicho": [
+            [
+              "PST-1019",
+              13
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 1.0,
+            "recall_tx": 1.0,
+            "f1_tx": 1.0,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "acierto_perfecto",
+          "latencia": 2.864,
+          "costo": 0.007349999999999999
+        },
+        {
+          "caso_id": "BENCH-037",
+          "pedido": "Cotiza 7 poste para alambrado de calibre 12 (el normal)",
+          "esperado": [
+            [
+              "PST-1073",
+              7
+            ]
+          ],
+          "predicho": [
+            [
+              "PST-1073",
+              7
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 1.0,
+            "recall_tx": 1.0,
+            "f1_tx": 1.0,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "acierto_perfecto",
+          "latencia": 3.289,
+          "costo": 0.00734
+        },
+        {
+          "caso_id": "BENCH-038",
+          "pedido": "Por favor mándame 6 viga de hormigon",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              6
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 6.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 2.566,
+          "costo": 0.007404999999999999
+        },
+        {
+          "caso_id": "BENCH-039",
+          "pedido": "Necesito 18 rejilla de metal",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              18
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 18.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 4.152,
+          "costo": 0.00728
+        },
+        {
+          "caso_id": "BENCH-040",
+          "pedido": "Quiero 3 poste para alambrado () y 6 pilar () y 16 poste para cerca del tipo",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ],
+            [
+              "REVISION_MANUAL",
+              0
+            ],
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              3
+            ],
+            [
+              "REVISION_MANUAL",
+              6
+            ],
+            [
+              "REVISION_MANUAL",
+              16
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 25.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 5.548,
+          "costo": 0.009845
+        },
+        {
+          "caso_id": "BENCH-041",
+          "pedido": "Quiero 6 poste para alambrado y 1 grapas para cerca alta resistencia",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ],
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              6
+            ],
+            [
+              "GRP-1111",
+              1
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 0.5,
+            "recall_id": 0.5,
+            "f1_id": 0.5,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 6.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 4.658,
+          "costo": 0.0088825
+        },
+        {
+          "caso_id": "BENCH-042",
+          "pedido": "Cotiza 14 viga de hormigon y 5 pua del tipo",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ],
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              14
+            ],
+            [
+              "REVISION_MANUAL",
+              5
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 19.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 5.355,
+          "costo": 0.008905
+        },
+        {
+          "caso_id": "BENCH-043",
+          "pedido": "Por favor mándame 24 poste para alambrado",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              24
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 24.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 3.447,
+          "costo": 0.0073625
+        },
+        {
+          "caso_id": "BENCH-044",
+          "pedido": "Cotiza 17 grapas para cerca del tipo y 2 malla de acero de (el normal) y 3 poste para cerca del tipo",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ],
+            [
+              "REVISION_MANUAL",
+              0
+            ],
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              17
+            ],
+            [
+              "REVISION_MANUAL",
+              2
+            ],
+            [
+              "REVISION_MANUAL",
+              3
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 22.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 14.569,
+          "costo": 0.0097575
+        },
+        {
+          "caso_id": "BENCH-045",
+          "pedido": "Necesito 13 pilar (calibre 14)",
+          "esperado": [
+            [
+              "PST-1070",
+              13
+            ]
+          ],
+          "predicho": [
+            [
+              "PST-1094",
+              13
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 0.0,
+            "recall_id": 0.0,
+            "f1_id": 0.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "alucinacion_sku",
+          "latencia": 2.06,
+          "costo": 0.007295000000000001
+        },
+        {
+          "caso_id": "BENCH-046",
+          "pedido": "Despachen 19 poste para alambrado de calibre 12 (el normal) y 20 clavo para madera de grueso (el normal) y 14 grampas grueso",
+          "esperado": [
+            [
+              "PST-1073",
+              19
+            ],
+            [
+              "CLV-1014",
+              20
+            ],
+            [
+              "GRP-1025",
+              14
+            ]
+          ],
+          "predicho": [
+            [
+              "PST-1073",
+              19
+            ],
+            [
+              "CLV-1035",
+              20
+            ],
+            [
+              "REVISION_MANUAL",
+              14
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 0.3333333333333333,
+            "recall_id": 0.3333333333333333,
+            "f1_id": 0.3333333333333333,
+            "precision_tx": 0.3333333333333333,
+            "recall_tx": 0.3333333333333333,
+            "f1_tx": 0.3333333333333333,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "derivacion_innecesaria",
+          "latencia": 7.744,
+          "costo": 0.010767500000000001
+        },
+        {
+          "caso_id": "BENCH-047",
+          "pedido": "Por favor mándame 7 grapas () y 8 malla soldada",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ],
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              7
+            ],
+            [
+              "REVISION_MANUAL",
+              8
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 15.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 2.887,
+          "costo": 0.0085525
+        },
+        {
+          "caso_id": "BENCH-048",
+          "pedido": "Quiero 11 viga de hormigon de calibre 12 (el normal) y 1 grapas del tipo fino",
+          "esperado": [
+            [
+              "PST-1132",
+              11
+            ],
+            [
+              "GRP-1022",
+              1
+            ]
+          ],
+          "predicho": [
+            [
+              "PST-1132",
+              11
+            ],
+            [
+              "REVISION_MANUAL",
+              1
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 0.5,
+            "recall_id": 0.5,
+            "f1_id": 0.5,
+            "precision_tx": 0.5,
+            "recall_tx": 0.5,
+            "f1_tx": 0.5,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "derivacion_innecesaria",
+          "latencia": 4.04,
+          "costo": 0.00965
+        },
+        {
+          "caso_id": "BENCH-049",
+          "pedido": "Por favor mándame 3 poste para cerca alta resistencia y 17 grapas para cerca de fino (el normal) y 5 grapas para cerca calibre 14",
+          "esperado": [
+            [
+              "PST-1032",
+              3
+            ],
+            [
+              "GRP-1062",
+              17
+            ],
+            [
+              "GRP-1077",
+              5
+            ]
+          ],
+          "predicho": [
+            [
+              "PST-1032",
+              3
+            ],
+            [
+              "GRP-1062",
+              17
+            ],
+            [
+              "REVISION_MANUAL",
+              5
+            ]
+          ],
+          "contiene_ruido": false,
+          "metricas": {
+            "precision_id": 0.6666666666666666,
+            "recall_id": 0.6666666666666666,
+            "f1_id": 0.6666666666666666,
+            "precision_tx": 0.6666666666666666,
+            "recall_tx": 0.6666666666666666,
+            "f1_tx": 0.6666666666666666,
+            "mae_cantidad": 0.0
+          },
+          "categoria_error": "derivacion_innecesaria",
+          "latencia": 3.873,
+          "costo": 0.009792499999999999
+        },
+        {
+          "caso_id": "BENCH-050",
+          "pedido": "Cotiza 10 clavos de (el normal)",
+          "esperado": [
+            [
+              "REVISION_MANUAL",
+              0
+            ]
+          ],
+          "predicho": [
+            [
+              "REVISION_MANUAL",
+              10
+            ]
+          ],
+          "contiene_ruido": true,
+          "metricas": {
+            "precision_id": 1.0,
+            "recall_id": 1.0,
+            "f1_id": 1.0,
+            "precision_tx": 0.0,
+            "recall_tx": 0.0,
+            "f1_tx": 0.0,
+            "mae_cantidad": 10.0
+          },
+          "categoria_error": "derivacion_correcta",
+          "latencia": 2.605,
+          "costo": 0.007359999999999999
+        }
+      ]
+    }
+  }
+}
